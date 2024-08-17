@@ -3,6 +3,7 @@ import json
 import pickle
 from collections import OrderedDict
 import math
+import tensorflow as tf
 
 
 class DataSet:
@@ -59,14 +60,14 @@ class DataSet:
 
     @staticmethod
     def label_smiles(line, max_smi_len, smi_ch_ind):
-        X = np.zeros(max_smi_len)
+        X = np.zeros(max_smi_len, dtype=np.int64)
         for i, ch in enumerate(line[:max_smi_len]):
             X[i] = smi_ch_ind[ch]
         return X
 
     @staticmethod
     def label_sequence(line, max_seq_len, smi_ch_ind):
-        X = np.zeros(max_seq_len)
+        X = np.zeros(max_seq_len, dtype=np.int64)
         for i, ch in enumerate(line[:max_seq_len]):
             X[i] = smi_ch_ind[ch]
         return X
@@ -102,3 +103,11 @@ def prepare_interaction_pairs(XD, XT, Y, rows, cols):
     target_data = np.stack(targets)
 
     return drug_data, target_data, affinity
+
+
+def create_tf_dataset(drug_data, target_data, affinity, batch_size, shuffle=True):
+    dataset = tf.data.Dataset.from_tensor_slices(((drug_data, target_data), affinity))
+    if shuffle:
+        dataset = dataset.shuffle(buffer_size=len(drug_data))
+    dataset = dataset.batch(batch_size)
+    return dataset

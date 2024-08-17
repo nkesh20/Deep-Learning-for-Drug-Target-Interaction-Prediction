@@ -1,5 +1,3 @@
-
-
 def get_config():
     config = {
         # Model architecture
@@ -29,11 +27,21 @@ def get_config():
         'log_dir': 'logs',
 
         # Model type
-        'model_type': 'cnn',  # or 'attention'
+        'model_type': 'cnn',  # 'cnn', 'lstm', 'lstm_attention', or 'transformer'
 
         # Dataset specific
         'davis_convert_to_log': True,
         'kiba_convert_to_log': False,
+
+        # LSTM parameters
+        'lstm_units': 128,
+        'lstm_layers': 2,
+
+        # Transformer parameters
+        'num_heads': 8,
+        'num_layers': 4,
+        'ff_dim': 2048,
+        'dropout_rate': 0.1,
     }
 
     return config
