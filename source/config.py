@@ -42,6 +42,10 @@ def get_config():
         'num_layers': 4,
         'ff_dim': 2048,
         'dropout_rate': 0.1,
+
+        # Alphabet sizes
+        'charsmiset_size': 64,  # Size of SMILES alphabet
+        'charseqset_size': 26,  # Size of protein sequence alphabet
     }
 
     return config
