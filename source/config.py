@@ -17,8 +17,8 @@ def get_config():
         'batch_size': 256,
 
         # Data handling
-        'davis_path': 'data/davis/',
-        'kiba_path': 'data/kiba/',
+        'davis_path': '/content/drive/MyDrive/BioInf-Final/data/davis/',
+        'kiba_path': '/content/drive/MyDrive/BioInf-Final/data/kiba/',
         'problem_type': 1,
         'binary_th': 0.0,
 
